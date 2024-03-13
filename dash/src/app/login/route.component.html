@@ -1,0 +1,19 @@
+<main>
+  <div class="login">
+    <form class="example-form" [formGroup]="loginForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Usuário</mat-label>
+        <input matInput formControlName="usuario" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="senha" />
+      </mat-form-field>
+    </form>
+
+    <button (click)="navigateToAbout()" class="button-menu" mat-flat-button>
+      Entrar
+    </button>
+  </div>
+</main>

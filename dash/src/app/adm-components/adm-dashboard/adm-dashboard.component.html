@@ -1,0 +1,137 @@
+<mat-drawer-content class="mat-drawer-content" style="margin-left: 0">
+  <section class="content">
+    <div class="left-content">
+      <div class="activities">
+        <div class="row">
+          <div>
+            <h1>Planta do colaborador</h1>
+            <h2>Setor</h2>
+          </div>
+          <div>
+            <button mat-raised-button (click)="drawer.toggle()">Filtros</button>
+          </div>
+        </div>
+
+        <mat-drawer class="drawer" #drawer>
+          <div class="row-gap">
+            <div class="nav-title">
+            Filtros
+          </div>
+            <button mat-icon-button (click)="drawer.toggle()">X</button>
+          </div>
+
+          <mat-stepper orientation="vertical" [linear]="isLinear" #stepper class="stepper">
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Escolha o setor</ng-template>
+                <mat-form-field>
+                  <mat-label>Setor</mat-label>
+                  <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperNext>Próximo</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+              <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Escolha o turno</ng-template>
+                <mat-form-field>
+                  <mat-label>Turno</mat-label>
+                  <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                         required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Voltar</button>
+                  <button mat-button matStepperNext>Próximo</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Visualizar dash</ng-template>
+              <div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button (click)="stepper.reset()">Limpar filtros</button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+          
+        </mat-drawer>
+
+        <div class="cards">
+          <mat-card
+            class="simple-card"
+            *ngFor="let card of visibleCards; let i = index"
+            [class.slide-right]="slideAnimationActive"
+          >
+            <button mat-button class="simple-button" (click)="focus($event)">
+              <mat-card-content>{{ card.title }}</mat-card-content>
+            </button>
+          </mat-card>
+
+          <button mat-button class="right-arrow" (click)="next()">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="home"
+            ></mat-icon>
+          </button>
+        </div>
+
+        <div class="card-full">
+          <div class="row">
+            <div class="col">
+              <!-- <div>2023</div> -->
+              <div class="text1">423 dias abonados</div>
+              <div class="text2">Diferença...</div>
+              <div>Aumento de faltas</div>
+            </div>
+            <div>
+              <apx-chart
+                [series]="chartOptions.series!"
+                [chart]="chartOptions.chart!"
+                [xaxis]="chartOptions.xaxis!"
+                [dataLabels]="chartOptions.dataLabels!"
+                [grid]="chartOptions.grid!"
+                [stroke]="chartOptions.stroke!"
+                [title]="chartOptions.title!"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+
+        <div class="visao-geral">
+          <!-- *ngFor="let card of visibleCards;" -->
+          <div class="tabels">
+            <table class="card-small">
+              <div class="card-title">
+                Nota média das Unidades Organizacionais
+              </div>
+              <div class="card-nota">{{ selected }}</div>
+            </table>
+            <table class="card-small">
+              <div class="card-title">
+                Nota média das Unidades Organizacionais
+              </div>
+              <div class="card-nota">{{ selected }}</div>
+            </table>
+            <table class="card-small">
+              <div class="card-title">
+                Nota média das Unidades Organizacionais
+              </div>
+              <div class="card-nota">{{ selected }}</div>
+            </table>
+            <table class="card-small">
+              <div class="card-title">
+                Nota média das Unidades Organizacionais
+              </div>
+              <div class="card-nota">{{ selected }}</div>
+            </table>
+          </div>
+        </div>
+
+        <router-outlet />
+      </div>
+    </div>
+  </section>
+</mat-drawer-content>
